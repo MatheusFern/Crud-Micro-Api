@@ -1,3 +1,4 @@
+
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -9,6 +10,7 @@ const {
   getUserByType
 } = require("./dynamo");
 const {mapRequestToDatabaseFormat } = require("./utils")
+
 app.use(
   cors({
     origin: "*",
@@ -16,7 +18,7 @@ app.use(
 );
 app.use(express.json());
 app.get("/", (req, res) => {
-  res.send("Hello MOTAFACA");
+  res.json({ message: "API funcionando!" })
 });
 
 app.get("/users", async (req, res) => {
@@ -111,3 +113,5 @@ app.delete("/users/:id", async (req, res) => {
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => [console.log(`escutando na porta`, port)]);
+
+module.exports = app
